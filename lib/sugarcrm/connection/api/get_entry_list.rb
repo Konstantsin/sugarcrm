@@ -1,14 +1,14 @@
 module SugarCRM; class Connection
-  # Retrieve a list of SugarBeans.  This is the primary method for getting 
+  # Retrieve a list of SugarBeans.  This is the primary method for getting
   # a list of SugarBeans using the REST API.
   def get_entry_list(module_name, query, opts={})
     login! unless logged_in?
     options = {
-      :order_by => '', 
-      :offset => '', 
-      :fields => [], 
-      :link_fields => [], 
-      :limit => '', 
+      :order_by => '',
+      :offset => '',
+      :fields => [],
+      :link_fields => [],
+      :limit => '',
       :deleted => 0
     }.merge! opts
 
@@ -26,6 +26,6 @@ module SugarCRM; class Connection
       }
     EOF
     json.gsub!(/^\s{6}/,'')
-    SugarCRM::Response.handle(send!(:get_entry_list, json), @session)
+    SugarCRM::Response.handle(send!(:get_entry_list, json), @session, options)
   end
 end; end
